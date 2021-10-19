@@ -15,7 +15,7 @@ NODE=http://localhost:26657 #change it only if you use another rpc port of your 
 
 for (( ;; )); do
         BAL=$(${NET} query bank balances ${DELEGATOR} --node ${NODE});
-        echo -e "BALANCE: ${GREEN}${BAL}${NC} uatolo\n"
+        echo -e "BALANCE: ${GREEN}${BAL}${NC} ${CURRENCY}\n"
         echo -e "Claim rewards\n"
         echo -e "${KEYPHRASE}\n${KEYPHRASE}\n" | ${NET} tx distribution withdraw-rewards ${VALIDATOR} --chain-id ${CHAIN_ID} --from ${WALLET_NAME} --node ${NODE} --commission -y --fees ${FEE}${CURRENCY}
         for (( timer=10; timer>0; timer-- ))
@@ -25,7 +25,7 @@ for (( ;; )); do
         done
         BAL=$(${NET} query bank balances ${DELEGATOR} --node ${NODE} -o json | jq -r '.balances | .[].amount');
         BAL=$((BAL-1000000));
-        echo -e "BALANCE: ${GREEN}${BAL}${NC} uatolo\n"
+        echo -e "BALANCE: ${GREEN}${BAL}${NC} ${CURRENCY}\n"
         echo -e "Stake ALL\n"
         echo -e "${KEYPHRASE}\n${KEYPHRASE}\n" | ${NET} tx staking delegate ${VALIDATOR} ${BAL}${CURRENCY} --chain-id ${CHAIN_ID} --from ${WALLET_NAME} --node ${NODE} -y --fees  ${FEE}${CURRENCY}
         for (( timer=${DELAY}; timer>0; timer-- ))
