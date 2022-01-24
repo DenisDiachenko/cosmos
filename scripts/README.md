@@ -10,7 +10,7 @@ chmod +x autostake.sh
 ```
 3. Open the script and edit the variables accroding your testned, validator address, fees, etc.:
 ```
-nano restakingOmniFLix.sh
+nano autostake.sh
 ```
 4. Install the `Screen` tool:
 ```
